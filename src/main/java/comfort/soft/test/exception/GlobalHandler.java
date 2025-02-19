@@ -1,5 +1,6 @@
 package comfort.soft.test.exception;
 
+import comfort.soft.test.parser.NoSuchXlsx;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,9 @@ public class GlobalHandler {
     @ExceptionHandler(exception = NoSuchXlsx.class)
     public ResponseEntity<String> handleFsException(NoSuchXlsx ex) {
         String message = ex.getMessage();
-        log.error(message);
-        return new ResponseEntity<>(message, HttpStatusCode.valueOf(404));
+        String errorMessage = String.format("No such file by passed path. Additional info: %s", message);
+        log.error(errorMessage);
+        return new ResponseEntity<>(errorMessage, HttpStatusCode.valueOf(404));
     }
 
 }

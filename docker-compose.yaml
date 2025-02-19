@@ -1,0 +1,5 @@
+services:
+  backend:
+    image: igorshmidt/comfortsoft-task-solution
+    ports:
+      - "8080:8080"
